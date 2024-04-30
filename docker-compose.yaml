@@ -1,0 +1,15 @@
+services:
+  testnode:
+    image: ipfs/kubo:master-2024-04-17-eb97cf9
+    ports:
+      - '5001:5001'
+
+  tester:
+    build: .
+    environment:
+      TEST_IPFS_HOST: testnode
+      TEST_IPFS_PORT: 5001
+    depends_on:
+      testnode:
+        condition: service_healthy
+    command: 'go test ./...' # todo: run testing.Main as test binary

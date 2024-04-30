@@ -6,17 +6,21 @@ import (
 	"testing"
 
 	"github.com/gm0stache/atproto-ipfs-bkup/pkg/ipfs"
+	"github.com/gm0stache/atproto-ipfs-bkup/pkg/testhelper"
 	"github.com/ipfs/boxo/path"
 	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/require"
 )
 
-func TestUpload(t *testing.T) {
+func TestUploadAndDownload(t *testing.T) {
 	// arrange
 	file, err := os.ReadFile("../../testdata/did:plc:5molcdxko5rtwkjivyiviss6.car")
 	require.NoError(t, err)
 
-	ma, err := multiaddr.NewMultiaddr("/ip4/127.0.0.1/tcp/5001")
+	ipfsNodePath, err := testhelper.GetIPFSNodePath()
+	require.NoError(t, err)
+
+	ma, err := multiaddr.NewMultiaddr(ipfsNodePath)
 	require.NoError(t, err)
 
 	api, err := ipfs.NewCustomIPFSAPI(ma)
