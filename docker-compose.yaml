@@ -12,4 +12,4 @@ services:
     depends_on:
       testnode:
         condition: service_healthy
-    command: 'go test ./...' # todo: run testing.Main as test binary
+    command: 'go test ./...' # todo: run integration test binary here
