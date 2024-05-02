@@ -1,16 +1,25 @@
-package ipfs_test
+package tester_test
 
 import (
 	"context"
+	"log"
 	"os"
 	"testing"
 
 	"github.com/gm0stache/atproto-ipfs-bkup/pkg/ipfs"
-	"github.com/gm0stache/atproto-ipfs-bkup/pkg/testhelper"
+	"github.com/gm0stache/atproto-ipfs-bkup/test-integration/testhelper"
 	"github.com/ipfs/boxo/path"
 	"github.com/multiformats/go-multiaddr"
 	"github.com/stretchr/testify/require"
 )
+
+
+func TestMain(m *testing.M) {
+	if _, err := testhelper.GetIPFSNodePath(); err != nil {
+		log.Fatal(err)
+	}
+	os.Exit(m.Run())
+}
 
 func TestUploadAndDownload(t *testing.T) {
 	// arrange

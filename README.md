@@ -13,7 +13,7 @@ todo: what should be the value of being able to directly address cid's from bsky
 
 ##### integration
 
-to run the execution tests, run `docker compose up --build` in the root dir.
+to run the execution tests, run `make test-integration` in the root dir.
 
 ### todos:
 
