@@ -16,11 +16,13 @@ func GetATID(ctx context.Context, handle string) (*identity.Identity, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	idDir := identity.DefaultDirectory()
 	ident, err := idDir.Lookup(ctx, *atID)
 	if err != nil {
 		return nil, err
 	}
+
 	return ident, nil
 }
 
@@ -29,9 +31,11 @@ func DownloadRepo(ctx context.Context, path string, id *identity.Identity) error
 	client := xrpc.Client{
 		Host: id.PDSEndpoint(),
 	}
+
 	repoByts, err := atproto.SyncGetRepo(ctx, &client, id.DID.String(), "")
 	if err != nil {
 		return err
 	}
+
 	return os.WriteFile(path, repoByts, 0666)
 }
