@@ -30,7 +30,11 @@ type testSuit struct {
 
 func TestAll(t *testing.T) {
 	cfg := &EnvConfig{}
-	if err := envconfig.Parse(cfg); err != nil {
+	opts := envconfig.Options{
+		Prefix: "TEST_",
+	}
+
+	if err := envconfig.ParseWithOptions(cfg, opts); err != nil {
 		log.Fatalf("could not read test config from env: %+v\n", err)
 	}
 
@@ -55,6 +59,8 @@ func TestAll(t *testing.T) {
 			test(&tSuit)
 		})
 	}
+
+	t.Log("all tests finished.")
 }
 
 func uploadAndDownload(ts *testSuit) {
@@ -75,6 +81,8 @@ func uploadAndDownload(ts *testSuit) {
 
 	// assert
 	require.NoError(ts.t, err)
+
+	ts.t.Logf("ipfs content path: %q", contentPath)
 
 	p, err := path.NewPath(contentPath)
 	require.NoError(ts.t, err)
