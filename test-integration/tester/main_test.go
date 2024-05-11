@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	envconfig "github.com/caarlos0/env/v11"
-	"github.com/gm0stache/atproto-ipfs-bkup/pkg/ipfs"
+	ipfs "github.com/gm0stache/atproto-ipfs-bkup/pkg/ipfs/native"
 	"github.com/gm0stache/atproto-ipfs-bkup/test-integration/testhelper"
 	"github.com/ipfs/boxo/path"
 	"github.com/multiformats/go-multiaddr"
