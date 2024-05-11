@@ -36,7 +36,5 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// todo: uploade to IPFS
-
 	fmt.Println("done.")
 }
