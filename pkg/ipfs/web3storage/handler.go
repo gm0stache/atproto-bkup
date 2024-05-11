@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/fs"
 	"net/http"
+	"os"
 
 	"github.com/ipfs/go-cid"
 	cidlink "github.com/ipld/go-ipld-prime/linking/cid"
@@ -42,7 +42,7 @@ func NewW3Storage(privateKey []byte, proof []byte) (*W3Storage, error) {
 }
 
 // UploadFile allows uploading a CAR archive to a web3.storage space.
-func (w3s *W3Storage) UploadCar(carFile fs.File, space did.DID) (*cid.Cid, error) {
+func (w3s *W3Storage) UploadCar(carFile *os.File, space did.DID) (*cid.Cid, error) {
 	data, err := io.ReadAll(carFile)
 	if err != nil {
 		return nil, err
