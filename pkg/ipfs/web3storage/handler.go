@@ -25,7 +25,7 @@ type W3Storage struct {
 
 // NewW3Storage initializes a new web3.storage handler.
 func NewW3Storage(privateKey []byte, proof []byte) (*W3Storage, error) {
-	issuer, err := signer.Decode(privateKey)
+	issuer, err := signer.Parse(string(privateKey))
 	if err != nil {
 		return nil, err
 	}
