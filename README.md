@@ -29,5 +29,5 @@ atp-bkup dload mona.lisa.me -o ./nice/dir/mynicefilename.car
 # installation
 
 ```shell
-go install github.com/gm0stache/atproto-bkup/cmd@latest
+go install github.com/gm0stache/atproto-bkup/cmd/atp-bkup@latest
 ```
