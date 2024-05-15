@@ -7,17 +7,15 @@ import (
 	"log"
 	"net/url"
 	"strings"
+	"time"
 
-	"github.com/gm0stache/atproto-ipfs-bkup/pkg/atproto"
+	"github.com/gm0stache/atproto-bkup/pkg/atproto"
 	"github.com/spf13/cobra"
 )
 
-// todo: add CLI interface
-// usage example: atp-util dload [handle] -o ./xmpl/dir/my-output.car
-
 var rootCmd = &cobra.Command{
-	Use:   "atputil",
-	Short: "atputil provides some small utilities for the 'ATproto' protocol.",
+	Use:   "atp-bkup",
+	Short: "atp-bkup provides some small utilities for the 'ATproto' protocol.",
 }
 
 var dloadCmd = &cobra.Command{
@@ -28,7 +26,6 @@ var dloadCmd = &cobra.Command{
 		if err := cobra.MinimumNArgs(1)(cmd, args); err != nil {
 			return err
 		}
-
 		return verifyATprotoHandle(args[0])
 	},
 	Run: func(cmd *cobra.Command, args []string) {
@@ -75,7 +72,8 @@ func downloadCar(ctx context.Context, handle string, path string) error {
 }
 
 func main() {
-	defaultOutputPath := "atp-repo.car"
+	tstamp := time.Now().Format("2006-01-02T15-04-05")
+	defaultOutputPath := fmt.Sprintf("atp-repo-%s.car", tstamp)
 	dloadCmd.Flags().StringP("output", "o", defaultOutputPath, "")
 
 	rootCmd.AddCommand(dloadCmd)

@@ -1,4 +1,4 @@
-module github.com/gm0stache/atproto-ipfs-bkup
+module github.com/gm0stache/atproto-bkup
 
 go 1.22.2
 
